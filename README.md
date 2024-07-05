@@ -29,6 +29,7 @@ As tarefas devem ser armazenadas em um banco de dados MySQL.
 ### Frontend:
 
 - Angular 17
+- Rxjs ou Ngrx ou Signals
 - TypeScript 5.4/5.5
 - SASS
 - HTML 5.2
