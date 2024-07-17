@@ -1,0 +1,12 @@
+<div trapFocus class="alert">
+  <div class="header d-flex align-items-center p-1 bg-secondary" [ngClass]="{'bg-success': toast.type == 'success', 'bg-danger': toast.type == 'error', 'bg-secondary': toast.type == 'info'}">
+    <h3 class="pe-3 m-0 w-100 fs-5">{{getTitle(toast.type)}} </h3>
+    <button type="button" class="close btn-close pe-1 ml-auto" aria-label="Close" (click)="this.dialogRef.close()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <p class="text-secondary m-0 p-1">
+    {{toast.message}}
+  </p>
+</div>
+
