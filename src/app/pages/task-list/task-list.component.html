@@ -1,8 +1,82 @@
-<div>
-  <h2>Tasks</h2>
-  <ul>
-    <li *ngFor="let task of tasks">
-      {{ task.title }} - {{ task.description }}
-    </li>
-  </ul>
-</div>
+<section class="d-flex justify-content-center mt-5 w-100">
+
+  <div class="mt-5 text-center w-75">
+    <h1 class="fs-2">Tasks</h1>
+    <div class="row mt-3 justify-content-center">
+      <div class="col-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 bg-light card-list">
+        <h2 class="fs-5 mb-4 mt-2">To do / 5</h2>
+        <ng-container *ngFor="let task of tasks">
+          <mat-card class="mb-2 mw-100">
+            <mat-card-header class="mb-2">
+              <mat-card-title>{{task.title}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="text-start text-truncate" [matTooltip]="task.description">
+              {{task.description}}
+            </mat-card-content>
+            <mat-card-actions class="d-flex w-100 justify-content-between pe-3">
+              <ng-container *ngIf="!task.done && !task.inProgress">
+                <mat-checkbox color="primary" (ngModel)="task.inProgress" (change)="handleTaskStatus(task)">
+                  In progress
+                </mat-checkbox>
+              </ng-container>
+              <ng-container *ngIf="task.inProgress">
+                <mat-checkbox color="primary" (ngModel)="task.inProgress" (change)="handleTaskStatus(task)">
+                  Done
+                </mat-checkbox>
+              </ng-container>
+              <button mat-raised-button color="warn" type="submit" (click)="delete(task)">Delete</button>
+            </mat-card-actions>
+          </mat-card>
+        </ng-container>
+        <ng-container *ngIf="loading">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </ng-container>
+      </div>
+      <div class="col-3 px-0  d-flex flex-column align-items-center px-2 mx-2 mt-2 bg-light card-list">
+        <h2 class="fs-5 mb-4 mt-2">In progress / 10</h2>
+        <ng-container *ngFor="let task of tasks">
+          <mat-card class="mb-2 mw-100">
+            <mat-card-header class="mb-2">
+              <mat-card-title>{{task.title}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="text-start text-truncate" [matTooltip]="task.description">
+              {{task.description}}
+            </mat-card-content>
+            <mat-card-actions class="d-flex w-100 justify-content-between pe-3">
+              <ng-container *ngIf="!task.done && !task.inProgress">
+                <mat-checkbox color="primary" (ngModel)="task.inProgress" (change)="handleTaskStatus(task)">
+                  In progress
+                </mat-checkbox>
+              </ng-container>
+              <ng-container *ngIf="task.inProgress">
+                <mat-checkbox color="primary" (ngModel)="task.inProgress" (change)="handleTaskStatus(task)">
+                  Done
+                </mat-checkbox>
+              </ng-container>
+              <button mat-raised-button color="warn" type="submit" (click)="delete(task)">Delete</button>
+            </mat-card-actions>
+          </mat-card>
+        </ng-container>
+      </div>
+      <div class="col-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 bg-light card-list">
+        <h2 class="fs-5 mb-4 mt-2">Done / 5</h2>
+        <ng-container *ngFor="let task of tasks">
+          <mat-card class="mb-2 mw-100">
+            <mat-card-header class="mb-2">
+              <mat-card-title>{{task.title}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="text-start text-truncate" [matTooltip]="task.description">
+              {{task.description}}
+            </mat-card-content>
+            <mat-card-actions class="d-flex w-100 justify-content-between pe-3">
+              <mat-checkbox color="primary" [checked]="true" disabled>
+                Done
+              </mat-checkbox>
+              <button mat-raised-button color="warn" type="submit" (click)="delete(task)">Delete</button>
+            </mat-card-actions>
+          </mat-card>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>
