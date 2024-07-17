@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
-import { LoginData } from '../../api/models/data-login';
+import { LoginData } from '../../api/models/data-login.model';
 import { Toast } from '../../common/models/toast.model';
 import { ToastService } from '../../common/services/toast.service'
 
@@ -43,9 +43,8 @@ export class LoginComponent {
     private toastService: ToastService,
   ) {
     this.form = this.fb.group({
-      userEmail: ['', [Validators.required,Validators.email]],
+      userEmail: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-
     });
   }
 
@@ -86,7 +85,7 @@ export class LoginComponent {
           this.form.reset();
         },
       });
-      
+
     } else {
       for (let control in this.form.controls) {
         this.form.get(control)?.markAsTouched();
