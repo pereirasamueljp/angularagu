@@ -28,7 +28,7 @@ export class ToastComponent {
     ngOnInit() {
         this.toast = this.toastData;
         if (this.toast.message == '') {
-          this.toast.message = 'Houve um problema de conexão. Tente novamente!'
+          this.toast.message = 'We got a connection issue. Please, try again!'
         }
         setTimeout(()=>{
           this.dialogRef.close()
@@ -37,10 +37,10 @@ export class ToastComponent {
 
     getTitle(type: string | undefined) {
         switch (type) {
-            case 'error': return 'Erro';
-            case 'info': return 'Informativo';
-            case 'success': return 'Informativo';
-            default: return 'Informativo';
+            case 'error': return 'Error';
+            case 'info': return 'Informative';
+            case 'success': return 'Success';
+            default: return 'Informative';
         }
     }
 

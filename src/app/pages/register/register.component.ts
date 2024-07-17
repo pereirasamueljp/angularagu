@@ -67,7 +67,7 @@ export class RegisterComponent {
         next: response => {
           let toast: Toast = {
             type: 'success',
-            message: "Cadastro realizado com sucesso!",
+            message: "User registration successfully!",
           }
           this.loading = false;
           this.toastService.showMessage(toast);
@@ -79,7 +79,7 @@ export class RegisterComponent {
         error: error => {
           let toast: Toast = {
             type: 'error',
-            message: "Erro ao realizar o cadastro. Tente novamente!",
+            message: "We got some issue in registration. Please, try again!",
           }
           this.loading = false;
           this.toastService.showMessage(toast);

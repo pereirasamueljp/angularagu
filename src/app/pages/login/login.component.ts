@@ -66,7 +66,7 @@ export class LoginComponent {
         next: userInfo => {
           let toast: Toast = {
             type: 'success',
-            message: "Login realizado com sucesso!",
+            message: "Login in successful!",
           }
           this.loading = false;
           this.toastService.showMessage(toast);
@@ -78,7 +78,7 @@ export class LoginComponent {
         error: error => {
           let toast: Toast = {
             type: 'error',
-            message: "Usuário ou senha incorretos!",
+            message: "Wrong user or password!",
           }
           this.loading = false;
           this.toastService.showMessage(toast);

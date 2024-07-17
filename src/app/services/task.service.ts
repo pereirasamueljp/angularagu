@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Task } from '../api/models/task.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class TaskService {
     return this.http.get<any[]>(`${this.apiUrl}/tasks`);
   }
 
-  addTask(title: string, description: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/tasks`, { title, description });
+  addTask(newTask: Task): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/task`, { ...newTask });
   }
 }
