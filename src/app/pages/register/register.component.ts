@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { AuthService } from "../../services/auth.service";
 import { ToastService } from '../../common/services/toast.service';
 import { Toast } from '../../common/models/toast.model';
-import { User } from '../../api/models/user.model';
+import { User } from '../../models/user.model';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';

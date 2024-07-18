@@ -10,9 +10,9 @@ import { MatCardModule } from '@angular/material/card'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
-import { LoginData } from '../../api/models/data-login.model';
 import { Toast } from '../../common/models/toast.model';
 import { ToastService } from '../../common/services/toast.service'
+import { LoginData } from '../../core/api/models/data-login.model';
 
 @Component({
   selector: 'app-login',
@@ -70,6 +70,7 @@ export class LoginComponent {
           }
           this.loading = false;
           this.toastService.showMessage(toast);
+          localStorage.setItem('email', userInfo.email)
           localStorage.setItem('token', userInfo.token)
           setTimeout(() => {
             this.router.navigate(['/tasks']);
@@ -78,7 +79,7 @@ export class LoginComponent {
         error: error => {
           let toast: Toast = {
             type: 'error',
-            message: "Wrong user or password!",
+            message: "Your Username/Password combination was incorrect, please try again.",
           }
           this.loading = false;
           this.toastService.showMessage(toast);
