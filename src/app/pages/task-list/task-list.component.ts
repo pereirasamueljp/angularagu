@@ -8,7 +8,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { WebSocketService } from '../../core/services/web-socket.service';
 import { ApiService } from '../../core/api/services/api.service';
-import { Store, StoreModule } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tasksInitialState } from '../../store/tasks/tasks.reducer';
 import { cloneDeep, upperFirst } from 'lodash';
@@ -27,7 +27,6 @@ import { FilterPipe } from '../../common/pipes/filter.pipe';
     MatProgressBarModule,
     MatCheckboxModule,
     MatTooltipModule,
-    StoreModule
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss'

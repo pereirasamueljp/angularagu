@@ -1,5 +1,6 @@
 import { ActionReducerMap, MetaReducer } from "@ngrx/store";
-import { tasksReducer } from "./tasks/tasks.reducer";
+import { TasksReducer } from "./tasks/tasks.reducer";
+import { UserReducer } from "./user/user.reducer";
 
 
 
@@ -8,7 +9,8 @@ import { tasksReducer } from "./tasks/tasks.reducer";
 export interface State {}; 
 
 export const reducers: ActionReducerMap<State> = {
-    tasks: tasksReducer
+    tasks: TasksReducer,
+    user: UserReducer
 };
 
 export const metaReducers: MetaReducer<State>[] = [];

@@ -88,7 +88,6 @@ export class WebSocketService {
             this.disconnect();
             console.error('Error in reconnection');
         });
-        this.joinRoom({email: 'pereirasamueljp@gmail.com', expireIn: '1721943421'})
     }
 
     reconfigure() {

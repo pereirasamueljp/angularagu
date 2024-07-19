@@ -4,7 +4,7 @@ import { remove, findIndex, isArray, cloneDeep } from 'lodash'
 import { taskActions } from './tasks.actions';
 import { ActionCallback } from '../models/action-playload';
 
-interface TasksState {
+export interface TasksState {
     tasks: Task[]
 }
 
@@ -13,7 +13,7 @@ export const tasksInitialState: TasksState = {
 };
 
 
-export const tasksReducer = createReducer(
+export const TasksReducer = createReducer(
     tasksInitialState,
     on(taskActions.add, addFunction),
     on(taskActions.update, updateFunction),
@@ -34,7 +34,7 @@ function removeFunction(state: TasksState, action: ActionCallback<Task[] | Task>
     let newState = cloneDeep(state)
     if (!isArray(action.playload)) {
         let task = action.playload
-        remove(newState.tasks, item => item.id === task.id); return newState;
+        remove(newState.tasks, item => item.id == task.id); return newState;
     } else {
         let tasks = action.playload;
         remove(newState.tasks, (el) => findIndex(tasks, (task) => task.id == el.id) >= 0); return newState;

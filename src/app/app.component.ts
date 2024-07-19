@@ -1,28 +1,31 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { RouterOutlet } from '@angular/router';
 import { Toast } from './common/models/toast.model';
 import { ToastService } from './common/services/toast.service';
 import { ToastComponent } from './common/toast/toast.component';
-import { NavComponent } from "./pages/nav/nav.component";
+import { NavComponent } from './components/nav/nav.component';
+import { UserLogService } from './core/services/user-log.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavComponent, MatDialogModule ],
+  imports: [CommonModule, RouterOutlet, NavComponent, MatDialogModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit{
-  title = 'frontend';
+  title = 'Tasks';
   toastList: Toast[] = [];
   toastQueue$ = this.toastService.getQueue();
   toastRunning = false;
-  
+  userLogged = false;
 
   constructor( 
     public toastService: ToastService,
     private dialog: MatDialog,
+    public userService: UserLogService
   ){
 
   }

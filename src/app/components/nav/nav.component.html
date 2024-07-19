@@ -1,0 +1,26 @@
+<mat-toolbar  #toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Open Navigation Menu" (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{title}}</span>
+  <span class="example-spacer"></span>
+  <div class="ms-auto d-flex align-items-center">
+    <span> Hi, {{(user$ | async).user?.name}} {{(user$ | async).user?.lastName}}</span>
+    <button mat-icon-button class="example-icon" aria-label="Log out">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+<mat-drawer-container id="container" autosize  fullscreen>
+  <mat-drawer #drawer mode="side" >
+    <p>Auto-resizing sidenav</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+  </mat-drawer>
+
+  <div class="w-100 h-100">
+    <ng-content></ng-content>
+  </div>
+
+</mat-drawer-container>

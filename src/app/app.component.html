@@ -1,6 +1,14 @@
 <main class="main">
-  <!-- <app-nav/> -->
-  <div class="content">
-    <router-outlet />
-  </div>
+  <ng-container *ngIf="userService.logged()">
+    <app-nav [title]="title" class="d-block h-100">
+      <div class="content">
+        <router-outlet />
+      </div>
+    </app-nav>
+  </ng-container>
+  <ng-container *ngIf="!userService.logged()">
+    <div class="content">
+      <router-outlet />
+    </div>
+  </ng-container>
 </main>

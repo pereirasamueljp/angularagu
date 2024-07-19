@@ -14,6 +14,7 @@ import { Toast } from '../../common/models/toast.model';
 import { ToastService } from '../../common/services/toast.service'
 import { LoginData } from '../../core/api/models/data-login.model';
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -26,7 +27,7 @@ import { LoginData } from '../../core/api/models/data-login.model';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
