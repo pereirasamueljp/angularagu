@@ -11,13 +11,17 @@ import { ApiService } from '../../core/api/services/api.service';
 import { Store, StoreModule } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tasksInitialState } from '../../store/tasks/tasks.reducer';
+import { cloneDeep, upperFirst } from 'lodash';
+import { SocketResponse } from '../../models/socket-response';
+import { FilterPipe } from '../../common/pipes/filter.pipe';
+
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
   imports: [
     CommonModule,
-    AsyncPipe,
+    FilterPipe,
     MatButtonModule,
     MatCardModule,
     MatProgressBarModule,
@@ -39,9 +43,9 @@ export class TaskListComponent {
     private store: Store<typeof tasksInitialState>
   ) {
     this.tasks$ = this.store.select('tasks')
-    this.webSocketService.on('task-list', (tasks: Task[]) => {
+    this.webSocketService.on('task-list', (socketResponse: SocketResponse<Task>) => {
       this.loading = true;
-      this.tasks = tasks;
+      this.store.dispatch({ type: `[TaskList Component] ${upperFirst(socketResponse.type)}`, playload: socketResponse.object })
       this.loading = false;
     })
   }
@@ -59,15 +63,37 @@ export class TaskListComponent {
     });
   }
 
-  handleTaskStatus(status: 'inProgress'| 'done',task: Task) {
-  
+  filterInitialState(task: Task){
+    return !!!task.inProgress && !!!task.done
+  }
+
+  filterInProgress(task: Task){
+    return !!task.inProgress && !task.done
+  }
+
+  filterDone(task: Task){
+    return !!task.done
+  }
+
+  handleTaskStatus(status: 'inProgress' | 'done', task: Task) {
+    this.loading = true;
+    let newTask = cloneDeep(task)
+    switch (status) {
+      case 'inProgress': newTask.inProgress = true; break;
+      case 'done': newTask.done = true; break;
+    }
+    this.updateTask(newTask)
+  }
+
+  updateTask(task: Task) {
+    this.apiService.update('task', task.id!, task).subscribe(()=> this.loading = false);
   }
 
   delete(task: Task) {
     this.loading = true;
-    this.apiService.delete('task',task.id!).subscribe(() => {
-      this.store.dispatch({ type: '[TaskList Component] Remove', playload: task })
+    this.apiService.delete('task', task.id!).subscribe(() => {
       this.loading = false;
     });
   }
+  
 }

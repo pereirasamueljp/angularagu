@@ -42,8 +42,8 @@ export class TaskComponent {
     private toastService: ToastService,
   ) {
     this.form = this.fb.group({
-      title: ['',Validators.required],
-      description: ['',Validators.required],
+      title: ['', Validators.required],
+      description: ['', Validators.required],
     });
   }
 
@@ -62,9 +62,12 @@ export class TaskComponent {
           }
           this.loading = false;
           this.toastService.showMessage(toast);
-        }
+        },
+        complete: () => {
+          this.loading = false;
+          this.form.reset();
+        },
       });
-
     } else {
       for (let control in this.form.controls) {
         this.form.get(control)?.markAsTouched();

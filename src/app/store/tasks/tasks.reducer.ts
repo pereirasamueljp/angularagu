@@ -24,9 +24,9 @@ export const tasksReducer = createReducer(
 function addFunction(state: TasksState, action: ActionCallback<Task[] | Task>) {
     let newState = cloneDeep(state)
     if (!isArray(action.playload)) {
-        newState.tasks.push(action.playload); return state;
+        newState.tasks.push(action.playload); return newState;
     } else {
-        newState.tasks = newState.tasks.concat((action.playload)); return state;
+        newState.tasks = newState.tasks.concat((action.playload)); return newState;
     }
 }
 
@@ -65,5 +65,6 @@ function updateFunction(state: TasksState, action: ActionCallback<Task[] | Task>
 }
 
 function resetFunction(state: TasksState) {
-    state.tasks.splice(0, state.tasks.length); return state;
+    let newState = cloneDeep(state)
+    newState.tasks.splice(0, state.tasks.length); return newState;
 }

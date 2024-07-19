@@ -85,6 +85,10 @@ export class RegisterComponent {
           this.toastService.showMessage(toast);
           this.form.reset();
         },
+        complete: () => {
+          this.loading = false;
+          this.form.reset();
+        },
       });
 
     } else {
