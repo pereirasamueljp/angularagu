@@ -35,7 +35,6 @@ export class ApiService {
     public get<T>(entity: string, id?: number, attributes?: string[], filters?: Object) {
        
         let params = {}
-        console.log(this.URL + (this.API ? '/' + this.API + '/' : '/') + entity + (id ? `/${id}` : '') + buildParams(params))
         if (attributes) params = { ...params, attributes };
         if (filters) params = { ...params, filters };
         

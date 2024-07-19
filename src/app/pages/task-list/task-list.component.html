@@ -5,7 +5,8 @@
     <div class="row mt-3 justify-content-center">
       <div class="col-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 card-list bg-primary-subtle">
         <h2 class="fs-5 mb-4 mt-2">To do / 5</h2>
-        <ng-container *ngFor="let task of tasks">
+
+        <ng-container *ngFor="let task of (tasks$ | async).tasks">
           <mat-card class="mb-2 w-100">
             <mat-card-header class="mb-2">
               <mat-card-title>{{task.title}}</mat-card-title>
@@ -14,16 +15,9 @@
               {{task.description}}
             </mat-card-content>
             <mat-card-actions class="d-flex w-100 justify-content-between pe-3">
-              <ng-container *ngIf="!task.done && !task.inProgress">
-                <mat-checkbox color="primary" (change)="task.inProgress = !task.inProgress; handleTaskStatus(task)">
-                  In progress
-                </mat-checkbox>
-              </ng-container>
-              <ng-container *ngIf="task.inProgress">
-                <mat-checkbox color="primary" (change)="task.done = !task.done; handleTaskStatus(task)">
-                  Done
-                </mat-checkbox>
-              </ng-container>
+              <mat-checkbox color="primary" (change)="handleTaskStatus('inProgress',task)">
+                In progress
+              </mat-checkbox>
               <button mat-raised-button color="warn" type="submit" (click)="delete(task)">Delete</button>
             </mat-card-actions>
           </mat-card>
@@ -43,19 +37,15 @@
               {{task.description}}
             </mat-card-content>
             <mat-card-actions class="d-flex w-100 justify-content-between pe-3">
-              <ng-container *ngIf="!task.done && !task.inProgress">
-                <mat-checkbox color="primary" (ngModel)="task.inProgress" (change)="handleTaskStatus(task)">
-                  In progress
-                </mat-checkbox>
-              </ng-container>
-              <ng-container *ngIf="task.inProgress">
-                <mat-checkbox color="primary" (ngModel)="task.inProgress" (change)="handleTaskStatus(task)">
-                  Done
-                </mat-checkbox>
-              </ng-container>
+              <mat-checkbox color="primary" (change)="handleTaskStatus('done', task)">
+                Done
+              </mat-checkbox>
               <button mat-raised-button color="warn" type="submit" (click)="delete(task)">Delete</button>
             </mat-card-actions>
           </mat-card>
+        </ng-container>
+        <ng-container *ngIf="loading">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         </ng-container>
       </div>
       <div class="col-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 bg-success-subtle card-list">
@@ -75,6 +65,9 @@
               <button mat-raised-button color="warn" type="submit" (click)="delete(task)">Delete</button>
             </mat-card-actions>
           </mat-card>
+        </ng-container>
+        <ng-container *ngIf="loading">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         </ng-container>
       </div>
     </div>
