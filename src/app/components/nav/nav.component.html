@@ -1,22 +1,52 @@
-<mat-toolbar  #toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Open Navigation Menu" (click)="drawer.toggle()">
+<mat-toolbar #toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Open Navigation Menu"
+    (click)="drawer.toggle(); isExpanded = !isExpanded">
     <mat-icon>menu</mat-icon>
   </button>
   <span>{{title}}</span>
   <span class="example-spacer"></span>
   <div class="ms-auto d-flex align-items-center">
-    <span> Hi, {{(user$ | async).user?.name}} {{(user$ | async).user?.lastName}}</span>
+    <span class="fs-6"> {{(user$ | async).user?.name}} {{(user$ | async).user?.lastName}}</span>
     <button mat-icon-button class="example-icon" aria-label="Log out">
       <mat-icon>logout</mat-icon>
     </button>
   </div>
 </mat-toolbar>
-<mat-drawer-container id="container" autosize  fullscreen>
-  <mat-drawer #drawer mode="side" >
-    <p>Auto-resizing sidenav</p>
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      Toggle extra text
-    </button>
+<mat-drawer-container id="container" autosize fullscreen>
+  <mat-drawer #drawer mode="over" class="d-flex justi" autosize fullscreen>
+    <div class="mt-2">
+      <div class="d-flex-inline">
+        <mat-nav-list>
+          <mat-list-item class="p-0">
+            <a mat-line [routerLink]="'tasks'"
+              class="btn btn-link text-decoration-none  d-flex align-items-center text-dark fs-6">
+              <mat-icon mat-list-icon class="me-3">receipt_long</mat-icon>
+              <span class="">Tasks</span>
+            </a>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item class="p-0">
+            <a mat-line [routerLink]="'task-register'"
+              class="btn btn-link text-decoration-none  d-flex align-items-center text-dark fs-6">
+              <mat-icon mat-list-icon class="me-3">assignment</mat-icon>
+              <span class="">Register Task</span>
+            </a>
+          </mat-list-item>
+          <ng-container *ngIf="(user$ | async).user?.admin">
+            <mat-divider></mat-divider>
+            <mat-list-item class="p-0">
+              <a mat-line [routerLink]="'user-register'"
+                class="btn btn-link text-decoration-none  d-flex align-items-center text-dark fs-6">
+                <mat-icon mat-list-icon class="me-3">domain</mat-icon>
+                <span class="">Register User</span>
+              </a>
+            </mat-list-item>
+          </ng-container>
+          
+        </mat-nav-list>
+      </div>
+    </div>
+
   </mat-drawer>
 
   <div class="w-100 h-100">

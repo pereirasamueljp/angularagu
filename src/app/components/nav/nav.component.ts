@@ -12,17 +12,26 @@ import { User } from '../../models/user.model';
 import { UserLogInfo } from '../../core/api/models/user-log-info.model';
 import { Observable } from 'rxjs';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list'
+import { MatDividerModule } from '@angular/material/divider'
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatIconModule, MatButtonModule, MatSidenavModule],
+  imports: [
+    CommonModule, MatToolbarModule, 
+    MatIconModule, MatButtonModule, 
+    MatSidenavModule,MatListModule,
+    MatDividerModule, RouterModule
+  ],
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements AfterViewInit {
   showFiller = false;
+  isExpanded = false;
 
   @Input()
   title: string = '';

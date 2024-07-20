@@ -3,9 +3,8 @@
   <div class="mt-5 text-center w-75">
     <h1 class="fs-2">Tasks</h1>
     <div class="row mt-3 justify-content-center">
-      <div class="col-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 card-list bg-primary-subtle">
+      <div class="col-md-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 card-list bg-primary-subtle">
         <h2 class="fs-5 mb-4 mt-2">To do / 5</h2>
-
         <ng-container *ngFor="let task of (tasks$ | async).tasks | filter: filterInitialState">
           <mat-card class="mb-2 w-100">
             <mat-card-header class="mb-2">
@@ -26,7 +25,7 @@
           <mat-progress-bar class ="mt-auto" mode="indeterminate"></mat-progress-bar>
         </ng-container>
       </div>
-      <div class="col-3 px-0  d-flex flex-column align-items-center px-2 mx-2 mt-2 card-list bg-warning-subtle">
+      <div class="col-md-3 px-0  d-flex flex-column align-items-center px-2 mx-2 mt-2 card-list bg-warning-subtle">
         <h2 class="fs-5 mb-4 mt-2">In progress / 10</h2>
         <ng-container *ngFor="let task of (tasks$ | async).tasks | filter: filterInProgress">
           <mat-card class="mb-2 w-100">
@@ -48,7 +47,7 @@
           <mat-progress-bar class ="mt-auto"mode="indeterminate"></mat-progress-bar>
         </ng-container>
       </div>
-      <div class="col-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 bg-success-subtle card-list">
+      <div class="col-md-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 bg-success-subtle card-list">
         <h2 class="fs-5 mb-4 mt-2">Done / 5</h2>
         <ng-container *ngFor="let task of (tasks$ | async).tasks | filter: filterDone">
           <mat-card class="mb-2 w-100">

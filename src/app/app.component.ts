@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { RouterOutlet } from '@angular/router';
 import { Toast } from './common/models/toast.model';
@@ -15,12 +15,12 @@ import { UserLogService } from './core/services/user-log.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, AfterViewInit{
   title = 'Tasks';
   toastList: Toast[] = [];
   toastQueue$ = this.toastService.getQueue();
   toastRunning = false;
-  userLogged = false;
+  pageloaded = false;
 
   constructor( 
     public toastService: ToastService,
@@ -37,6 +37,10 @@ export class AppComponent implements OnInit{
         this.toastController(toast)
       }
     })
+  }
+
+  ngAfterViewInit(): void {
+    this.pageloaded = true;
   }
 
   async toastController(toast: Toast) {
