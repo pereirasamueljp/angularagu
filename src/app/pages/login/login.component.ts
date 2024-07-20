@@ -13,10 +13,7 @@ import { Router } from "@angular/router";
 import { Toast } from '../../common/models/toast.model';
 import { ToastService } from '../../common/services/toast.service'
 import { LoginData } from '../../core/api/models/data-login.model';
-import { Store } from '@ngrx/store';
-import { userInitialState } from '../../store/user/user.reducer';
-import { ApiService } from '../../core/api/services/api.service';
-import { User } from '../../models/user.model';
+import { UserLogService } from '../../core/services/user-log.service';
 
 
 @Component({
@@ -43,11 +40,10 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
+    private userService: UserLogService,
     private router: Router,
     private fb: FormBuilder,
     private toastService: ToastService,
-    private apiService: ApiService,
-    private store: Store<typeof userInitialState>,
   ) {
     this.form = this.fb.group({
       userEmail: ['', [Validators.required, Validators.email]],
@@ -57,9 +53,9 @@ export class LoginComponent {
 
 
   ngOnInit(): void {
-    // if (this.userLoginService.isLoggedIn()) {
-    //   this.router.navigate(['/informativos'])
-    // }
+    if (this.userService.logged()) {
+      this.router.navigate(['/tasks'])
+    }
   }
 
   onSubmit(): void {
@@ -79,16 +75,9 @@ export class LoginComponent {
           localStorage.setItem('token', userInfo.token)
           this.loading = false;
           this.toastService.showMessage(toast);
-          // this.store.dispatch({ type: `[User] Add`, playload: user })
           setTimeout(() => {
-            this.router.navigate(['/tasks']);
+            window.location.reload();
           }, 1000);
-
-          // this.apiService.get<User>('users/self').subscribe(user => {
-
-
-          // });
-
         },
         error: error => {
           let toast: Toast = {

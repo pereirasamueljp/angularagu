@@ -3,12 +3,17 @@ import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
 import { UserLogInfo } from '../api/models/user-log-info.model';
 import { WebSocketService } from '../../core/services/web-socket.service';
+import { Router } from '@angular/router';
+import { Toast } from '../../common/models/toast.model';
+import { ToastService } from '../../common/services/toast.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserLogService {
 
     constructor(
-        private readonly _socket: WebSocketService
+        private readonly _socket: WebSocketService,
+        private router: Router,
+        private toastService: ToastService,
     ) { }
 
     private static token: any = null;
@@ -80,5 +85,13 @@ export class UserLogService {
     logout() {
         this.setUser(null);
         this.setToken('');
+        let toast: Toast = {
+            type: 'success',
+            message: "Logout successful!",
+        }
+        this.toastService.showMessage(toast);
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
     }
 }

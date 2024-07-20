@@ -50,7 +50,7 @@ export class NavComponent implements AfterViewInit {
   ) {
     this.user$ = this.store.select('user')
     this.userData = this.userService.getAllData();
-    this.apiService.get<User>('users/self', undefined, undefined, { email: this.userData.email }).subscribe(user => {
+    this.apiService.get<User>('users/self').subscribe(user => {
       this.store.dispatch({ type: `[User] Add`, playload: user })
     });
   }
