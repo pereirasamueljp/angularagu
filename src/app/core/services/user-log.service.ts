@@ -32,10 +32,10 @@ export class UserLogService {
             UserLogService.token = null;
         }
         UserLogService.isLoaded = true;
-        this.conectaSocket();
+        this.conectSocket();
     }
 
-    conectaSocket() {
+    conectSocket() {
         if (UserLogService.token) {
             this._socket.autenticate(UserLogService.token.token);
         }
@@ -55,7 +55,7 @@ export class UserLogService {
     setToken(token: any) {
         UserLogService.token = token;
         localStorage.setItem('token', UserLogService.token);
-        this.conectaSocket();
+        this.conectSocket();
     }
 
     setUser(user: UserLogInfo | null) {

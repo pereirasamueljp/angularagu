@@ -13,6 +13,10 @@ import { Router } from "@angular/router";
 import { Toast } from '../../common/models/toast.model';
 import { ToastService } from '../../common/services/toast.service'
 import { LoginData } from '../../core/api/models/data-login.model';
+import { Store } from '@ngrx/store';
+import { userInitialState } from '../../store/user/user.reducer';
+import { ApiService } from '../../core/api/services/api.service';
+import { User } from '../../models/user.model';
 
 
 @Component({
@@ -42,6 +46,8 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private toastService: ToastService,
+    private apiService: ApiService,
+    private store: Store<typeof userInitialState>,
   ) {
     this.form = this.fb.group({
       userEmail: ['', [Validators.required, Validators.email]],
@@ -69,13 +75,20 @@ export class LoginComponent {
             type: 'success',
             message: "Login in successful!",
           }
-          this.loading = false;
-          this.toastService.showMessage(toast);
           localStorage.setItem('email', userInfo.email)
           localStorage.setItem('token', userInfo.token)
+          this.loading = false;
+          this.toastService.showMessage(toast);
+          // this.store.dispatch({ type: `[User] Add`, playload: user })
           setTimeout(() => {
             this.router.navigate(['/tasks']);
           }, 1000);
+
+          // this.apiService.get<User>('users/self').subscribe(user => {
+
+
+          // });
+
         },
         error: error => {
           let toast: Toast = {

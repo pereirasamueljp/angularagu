@@ -1,6 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { upperFirst } from 'lodash';
 import * as SocketIOClient from 'socket.io-client';
+import { Task } from 'zone.js/lib/zone-impl';
 import { environment } from '../../../environments/environment';
+import { SocketResponse } from '../../models/socket-response';
+import { tasksInitialState } from '../../store/tasks/tasks.reducer';
 
 interface Room {
     email: string
@@ -20,7 +25,9 @@ export class WebSocketService {
 
     private readonly connectedRooms: { [key: string]: Room } = {};
 
-    constructor() {
+    constructor(
+        private store: Store
+    ) {
 
         const parsedUrl = new URL(environment.apiUrl);
         this.socket = this.io(parsedUrl.origin, {
@@ -35,7 +42,7 @@ export class WebSocketService {
         });
 
         this.socket.on('testing', data => {
-            console.log('cheguei',data);
+            console.log('cheguei', data);
         });
 
         this.socket.on('authenticated', () => {
@@ -88,6 +95,11 @@ export class WebSocketService {
             this.disconnect();
             console.error('Error in reconnection');
         });
+
+        this.socket.on('task-list', (socketResponse: SocketResponse<Task>) => {
+            console.log("chegueii",socketResponse)
+            this.store.dispatch({ type: `[TaskList Component] ${upperFirst(socketResponse.type)}`, playload: socketResponse.object })
+        })
     }
 
     reconfigure() {

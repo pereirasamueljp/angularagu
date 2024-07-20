@@ -51,7 +51,8 @@ function updateFunction(state: TasksState, action: ActionCallback<Task[] | Task>
     } else {
         let tasks = action.playload;
         if (tasks.length >= newState.tasks.length) {
-            newState.tasks = newState.tasks.splice(0, newState.tasks.length).concat(tasks)
+            newState.tasks.splice(0, newState.tasks.length)
+            newState.tasks = newState.tasks.concat(tasks)
         } else {
             newState.tasks.map(element => {
                 let index = findIndex(tasks, (task) => task.id == element.id);

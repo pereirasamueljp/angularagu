@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Store } from '@ngrx/store';
+import { userInitialState } from '../../store/user/user.reducer';
 
 
 @Component({
@@ -43,6 +45,7 @@ export class RegisterComponent {
     private router: Router,
     private fb: FormBuilder,
     private toastService: ToastService,
+    private store: Store<typeof userInitialState>
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -73,6 +76,7 @@ export class RegisterComponent {
           this.toastService.showMessage(toast);
           this.authService.logout();
           setTimeout(() => {
+            this.store.dispatch({ type: `[User] Reset`, playload: null })
             this.router.navigate(['/login']);
           }, 1000);
         },

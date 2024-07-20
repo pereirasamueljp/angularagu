@@ -1,10 +1,10 @@
-<section class="d-flex justify-content-center mt-5 w-100">
-
-  <div class="mt-5 text-center w-75">
-    <h1 class="fs-2">Tasks</h1>
+<section class="d-flex justify-content-center mt-3 w-100">
+  <div class="text-center w-75">
+    <!-- <h1 class="fs-2">Tasks</h1> -->
     <div class="row mt-3 justify-content-center">
-      <div class="col-md-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 card-list bg-primary-subtle">
-        <h2 class="fs-5 mb-4 mt-2">To do / 5</h2>
+      <div class="col-md-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 card-list first-list">
+        <h2 class="fs-5 mt-4 fw-bold">To do</h2>
+        <div class="w-100 text-end"><span class="fs-small">{{((tasks$ | async).tasks | filter: filterInitialState).length   +'/'+  (tasks$ | async).tasks.length}}</span></div>
         <ng-container *ngFor="let task of (tasks$ | async).tasks | filter: filterInitialState">
           <mat-card class="mb-2 w-100">
             <mat-card-header class="mb-2">
@@ -25,8 +25,9 @@
           <mat-progress-bar class ="mt-auto" mode="indeterminate"></mat-progress-bar>
         </ng-container>
       </div>
-      <div class="col-md-3 px-0  d-flex flex-column align-items-center px-2 mx-2 mt-2 card-list bg-warning-subtle">
-        <h2 class="fs-5 mb-4 mt-2">In progress / 10</h2>
+      <div class="col-md-3 px-0  d-flex flex-column align-items-center px-2 mx-2 mt-2 card-list second-list">
+        <h2 class="fs-5 mt-4 fw-bold">In progress</h2>
+        <div class="w-100 text-end"><span class="fs-small">{{((tasks$ | async).tasks | filter: filterInProgress).length   +'/'+  (tasks$ | async).tasks.length}}</span></div>
         <ng-container *ngFor="let task of (tasks$ | async).tasks | filter: filterInProgress">
           <mat-card class="mb-2 w-100">
             <mat-card-header class="mb-2">
@@ -47,8 +48,9 @@
           <mat-progress-bar class ="mt-auto"mode="indeterminate"></mat-progress-bar>
         </ng-container>
       </div>
-      <div class="col-md-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 bg-success-subtle card-list">
-        <h2 class="fs-5 mb-4 mt-2">Done / 5</h2>
+      <div class="col-md-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 third-list card-list">
+        <h2 class="fs-5 mt-4 fw-bold">Done</h2>
+        <div class="w-100 text-end"><span class="fs-small">{{((tasks$ | async).tasks | filter: filterDone).length   +'/'+  (tasks$ | async).tasks.length}}</span></div>
         <ng-container *ngFor="let task of (tasks$ | async).tasks | filter: filterDone">
           <mat-card class="mb-2 w-100">
             <mat-card-header class="mb-2">

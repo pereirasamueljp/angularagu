@@ -20,7 +20,6 @@ export class ApiService {
     }
 
     public delete(entity: string, id: number) {
-        console.log()
         return this.httpClient.delete(this.URL + (this.API ? '/' + this.API + '/' : '/') + entity + `/${id}`)
     }
 

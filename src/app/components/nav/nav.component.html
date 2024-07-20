@@ -7,7 +7,7 @@
   <span class="example-spacer"></span>
   <div class="ms-auto d-flex align-items-center">
     <span class="fs-6"> {{(user$ | async).user?.name}} {{(user$ | async).user?.lastName}}</span>
-    <button mat-icon-button class="example-icon" aria-label="Log out">
+    <button mat-icon-button class="example-icon" aria-label="Log out" (click)="logout()">
       <mat-icon>logout</mat-icon>
     </button>
   </div>
@@ -29,7 +29,7 @@
             <a mat-line [routerLink]="'task-register'"
               class="btn btn-link text-decoration-none  d-flex align-items-center text-dark fs-6">
               <mat-icon mat-list-icon class="me-3">assignment</mat-icon>
-              <span class="">Register Task</span>
+              <span class="">Task Registration</span>
             </a>
           </mat-list-item>
           <ng-container *ngIf="(user$ | async).user?.admin">
@@ -38,7 +38,7 @@
               <a mat-line [routerLink]="'user-register'"
                 class="btn btn-link text-decoration-none  d-flex align-items-center text-dark fs-6">
                 <mat-icon mat-list-icon class="me-3">domain</mat-icon>
-                <span class="">Register User</span>
+                <span class="">User Registration</span>
               </a>
             </mat-list-item>
           </ng-container>

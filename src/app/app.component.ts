@@ -2,11 +2,14 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { RouterOutlet } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Toast } from './common/models/toast.model';
 import { ToastService } from './common/services/toast.service';
 import { ToastComponent } from './common/toast/toast.component';
 import { NavComponent } from './components/nav/nav.component';
 import { UserLogService } from './core/services/user-log.service';
+import { userInitialState } from './store/user/user.reducer';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +24,15 @@ export class AppComponent implements OnInit, AfterViewInit{
   toastQueue$ = this.toastService.getQueue();
   toastRunning = false;
   pageloaded = false;
+  userState$: Observable<any>;
 
   constructor( 
     public toastService: ToastService,
     private dialog: MatDialog,
-    public userService: UserLogService
+    public userService: UserLogService,
+    private store: Store<typeof userInitialState>,
   ){
-
+    this.userState$ = this.store.select('user')
   }
 
 
