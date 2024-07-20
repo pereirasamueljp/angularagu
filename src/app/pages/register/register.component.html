@@ -1,0 +1,49 @@
+<section class="h-100 w-100 d-flex justify-content-center mt-3">
+
+    <div class="mt-5 w-25">
+        <mat-form-group [formGroup]="form" class="d-flex flex-column" (keydown.enter)="onSubmit()">
+            <mat-card class="d-flex flex-column">
+                <mat-card-header class="mb-2">
+                    <mat-card-title>User Register</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col pb-2">
+                            <mat-label>First Name</mat-label>
+                            <input matInput formControlName="name" type="text" name="name"
+                                placeholder="e.g: Jhon">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="col pb-2">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput formControlName="lastName" type="text" name="lastName"
+                                placeholder="e.g: Smith">
+                        </mat-form-field>
+                    </div>
+                    <mat-form-field appearance="outline" class="w-100 pb-2">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="userEmail" type="email" name="email"
+                            placeholder="e.g: yourname@example.com">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" name="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <mat-checkbox formControlName="admin" color="primary">Admin</mat-checkbox>
+                </mat-card-content>
+                <mat-card-actions class="d-flex w-100 justify-content-end pe-3">
+                    <button mat-button type="reset" (click)="onReset()" class="me-2">Clear</button>
+                    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+                </mat-card-actions>
+                <mat-card-footer>
+                    <ng-container *ngIf="loading">
+                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                    </ng-container>
+                </mat-card-footer>
+            </mat-card>
+        </mat-form-group>
+    </div>
+</section>

@@ -1,0 +1,28 @@
+.card-list{
+    min-width: 200px;
+    max-width: 400px;
+}
+
+primary-color{
+    background-color: #3f51b5;;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+    background-color: rgb(255, 105, 97) !important;
+}
+
+.first-list{
+    background-color: #d5d5d5 !important;
+}
+
+.second-list{
+    background-color: #aab6fe !important;
+}
+
+.third-list{
+    background-color: #ffcc80 !important;
+}
+
+.fs-small {
+    font-size: small;
+}

@@ -1,0 +1,76 @@
+<section class="d-flex justify-content-center mt-3 w-100">
+  <div class="text-center w-75">
+    <!-- <h1 class="fs-2">Tasks</h1> -->
+    <div class="row mt-3 justify-content-center">
+      <div class="col-md-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 card-list first-list">
+        <h2 class="fs-5 mt-4 fw-bold">To do</h2>
+        <div class="w-100 text-end"><span class="fs-small">{{((tasks$ | async).tasks | filter: filterInitialState).length   +'/'+  (tasks$ | async).tasks.length}}</span></div>
+        <ng-container *ngFor="let task of (tasks$ | async).tasks | filter: filterInitialState">
+          <mat-card class="mb-2 w-100">
+            <mat-card-header class="mb-2">
+              <mat-card-title>{{task.title}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="text-start text-truncate" [matTooltip]="task.description">
+              {{task.description}}
+            </mat-card-content>
+            <mat-card-actions class="d-flex w-100 justify-content-between pe-3">
+              <mat-checkbox color="primary" (change)="handleTaskStatus('inProgress',task)">
+                In progress
+              </mat-checkbox>
+              <button mat-raised-button color="warn" type="submit" (click)="delete(task)">Delete</button>
+            </mat-card-actions>
+          </mat-card>
+        </ng-container>
+        <ng-container *ngIf="loading">
+          <mat-progress-bar class ="mt-auto" mode="indeterminate"></mat-progress-bar>
+        </ng-container>
+      </div>
+      <div class="col-md-3 px-0  d-flex flex-column align-items-center px-2 mx-2 mt-2 card-list second-list">
+        <h2 class="fs-5 mt-4 fw-bold">In progress</h2>
+        <div class="w-100 text-end"><span class="fs-small">{{((tasks$ | async).tasks | filter: filterInProgress).length   +'/'+  (tasks$ | async).tasks.length}}</span></div>
+        <ng-container *ngFor="let task of (tasks$ | async).tasks | filter: filterInProgress">
+          <mat-card class="mb-2 w-100">
+            <mat-card-header class="mb-2">
+              <mat-card-title>{{task.title}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="text-start text-truncate" [matTooltip]="task.description">
+              {{task.description}}
+            </mat-card-content>
+            <mat-card-actions class="d-flex w-100 justify-content-between pe-3">
+              <mat-checkbox color="primary" (change)="handleTaskStatus('done', task)">
+                Done
+              </mat-checkbox>
+              <button mat-raised-button color="warn" type="submit" (click)="delete(task)">Delete</button>
+            </mat-card-actions>
+          </mat-card>
+        </ng-container>
+        <ng-container *ngIf="loading">
+          <mat-progress-bar class ="mt-auto"mode="indeterminate"></mat-progress-bar>
+        </ng-container>
+      </div>
+      <div class="col-md-3 px-0 d-flex flex-column align-items-center px-2 mx-2 mt-2 third-list card-list">
+        <h2 class="fs-5 mt-4 fw-bold">Done</h2>
+        <div class="w-100 text-end"><span class="fs-small">{{((tasks$ | async).tasks | filter: filterDone).length   +'/'+  (tasks$ | async).tasks.length}}</span></div>
+        <ng-container *ngFor="let task of (tasks$ | async).tasks | filter: filterDone">
+          <mat-card class="mb-2 w-100">
+            <mat-card-header class="mb-2">
+              <mat-card-title>{{task.title}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="text-start text-truncate" [matTooltip]="task.description">
+              {{task.description}}
+            </mat-card-content>
+            <mat-card-actions class="d-flex w-100 justify-content-between pe-3">
+              <mat-checkbox color="primary" [checked]="true" disabled>
+                Done
+              </mat-checkbox>
+              <button mat-raised-button color="warn" type="submit" (click)="delete(task)">Delete</button>
+            </mat-card-actions>
+          </mat-card>
+        </ng-container>
+        <ng-container *ngIf="loading">
+          <mat-progress-bar class ="mt-auto" mode="indeterminate"></mat-progress-bar>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>
